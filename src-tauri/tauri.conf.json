@@ -35,16 +35,7 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ],
-    "windows": {
-      "certificateThumbprint": null,
-      "digestAlgorithm": "sha256",
-      "timestampUrl": ""
-    },
-    "nsis": {
-      "displayLanguageSelector": false,
-      "languages": ["French"],
-      "installMode": "currentUser"
-    }
+    "createUpdaterArtifacts": false
   },
   "plugins": {
     "shell": {
