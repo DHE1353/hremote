@@ -1,0 +1,62 @@
+{
+  "productName": "HRemote",
+  "version": "1.0.0",
+  "identifier": "io.hsasoft.hremote",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "HRemote",
+        "width": 400,
+        "height": 620,
+        "resizable": false,
+        "center": true,
+        "decorations": false,
+        "transparent": false,
+        "alwaysOnTop": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "msi"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "timestampUrl": ""
+    },
+    "nsis": {
+      "displayLanguageSelector": false,
+      "languages": ["French"],
+      "installMode": "currentUser"
+    }
+  },
+  "plugins": {
+    "shell": {
+      "open": true,
+      "commands": [
+        {
+          "name": "rustdesk",
+          "cmd": "rustdesk",
+          "args": true,
+          "sidecar": false
+        }
+      ]
+    }
+  }
+}

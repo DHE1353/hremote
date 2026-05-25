@@ -1,0 +1,55 @@
+name: Build HRemote Windows
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate icons (placeholder si pas de logo)
+        run: |
+          if (Test-Path "public/logo.png") {
+            npm run tauri icon public/logo.png
+          } else {
+            Write-Host "Pas de logo — icônes par défaut"
+          }
+        shell: pwsh
+
+      - name: Build Tauri app
+        run: npm run tauri build
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ""
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ""
+
+      - name: Upload installeur NSIS
+        uses: actions/upload-artifact@v4
+        with:
+          name: HRemote-Windows-Setup
+          path: src-tauri/target/release/bundle/nsis/*.exe
+          if-no-files-found: warn
+
+      - name: Upload MSI
+        uses: actions/upload-artifact@v4
+        with:
+          name: HRemote-Windows-MSI
+          path: src-tauri/target/release/bundle/msi/*.msi
+          if-no-files-found: warn
