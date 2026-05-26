@@ -24,6 +24,10 @@ tauri-plugin-shell = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
+[package.metadata.bundle]
+identifier = "io.hsasoft.hremote"
+icon = ["icons/icon.ico", "icons/32x32.png", "icons/128x128.png"]
+
 [profile.release]
 panic = "abort"
 codegen-units = 1
