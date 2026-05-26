@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { Favorite, Mode, Status } from "../types";
-import { ModeSelector } from "./ModeSelector";
 import { launchRustDesk, formatId } from "../rustdesk";
 import { removeFavorite, updateFavorite } from "../storage";
 
